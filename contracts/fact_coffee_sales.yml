@@ -1,0 +1,31 @@
+dataset: duckdb/analytics/fact_coffee_sales
+
+columns:
+  - name: datetime
+  - name: date
+  - name: cash_type
+    checks:
+      - invalid:
+          valid_values: ['card', 'cash']
+  - name: card
+    checks:
+      - missing:
+          missing_values: ['']
+  - name: money
+  - name: coffee_name
+  - name: day
+  - name: month
+  - name: year
+
+checks:
+  - schema:
+      fail:
+        column_count: 9
+      allow_other_column_order: true
+  
+  - row_count:
+        threshold:
+          must_be_between:
+            greater_than: 0
+            less_than: 3640
+
