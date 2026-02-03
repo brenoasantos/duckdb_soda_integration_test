@@ -9,6 +9,7 @@ The goal of this project is to understand how Soda checks can be executed on top
 - Test Soda Core checks using DuckDB as the execution engine
 - Validate common data quality rules such as null checks, row count checks, and basic consistency validations
 - Explore how DuckDB and Soda integrate in practice
+- Use a publicly available dataset selected from Kaggle for experimentation
 
 ## Tech Stack
 
@@ -16,3 +17,8 @@ The goal of this project is to understand how Soda checks can be executed on top
 - DuckDB
 - Soda Core
 - Jupyter Notebook
+
+## Dataset
+
+The dataset used in this project was sourced from Kaggle:  
+https://www.kaggle.com/datasets/ihelon/coffee-sales/data
