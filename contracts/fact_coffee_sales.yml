@@ -2,30 +2,48 @@ dataset: duckdb/analytics/fact_coffee_sales
 
 columns:
   - name: datetime
+    data_type: DATETIME
   - name: date
   - name: cash_type
+    data_type: STRING
     checks:
       - invalid:
           valid_values: ['card', 'cash']
   - name: card
     checks:
       - missing:
-          missing_values: ['']
   - name: money
+    checks:
+      - invalid:
+          valid_min: 0
+          valid_max: 30
+      - aggregate:
+          function: avg
+          threshold:
+            must_be_between:
+              greater_than_or_equal: 31.742401098900494
+              less_than_or_equal: 31.742401098900496
   - name: coffee_name
+    checks:
+      - invalid:
+          valid_values: ['Espresso', 'Latte', 'Cappuccino', 'Americano']
   - name: day
   - name: month
   - name: year
 
 checks:
   - schema:
-      fail:
-        column_count: 9
       allow_other_column_order: true
-  
+
   - row_count:
         threshold:
           must_be_between:
             greater_than: 0
             less_than: 3640
 
+  - metric:
+      expression: median(money)
+      threshold:
+        must_be_between:
+          greater_than: 30
+          less_than: 50
